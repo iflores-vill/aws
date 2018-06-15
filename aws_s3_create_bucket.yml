@@ -5,6 +5,6 @@
   tasks:
     - name: Crear S3 Bucket
       aws_s3:
-        bucket: towerbucket
+        bucket: "{{ bucket_name }}"
         mode: create
         permission: public-read
