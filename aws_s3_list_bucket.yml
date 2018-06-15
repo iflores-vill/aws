@@ -5,5 +5,5 @@
   tasks:
     - name: Listar S3 Bucket
       aws_s3:
-        bucket: {{ bucket_name }}
+        bucket: "{{ bucket_name }}"
         mode: list
