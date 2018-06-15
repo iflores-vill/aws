@@ -3,7 +3,5 @@
   gather_facts: False
   connection: local
   tasks:
-    - name: Crear S3 Bucket
-      aws_s3:
-        bucket: towerbucket
-        mode: list
+    - name: Listar S3 Buckets
+    - aws_s3_bucket_facts:
