@@ -7,3 +7,5 @@
         ec2_url: ec2.ap-southeast-1.amazonaws.com
         aws_access_key: AKIAIPCW6HHN6CMIXYLA
         aws_secret_key: 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
+        validate_certs: no
+        region: ca-central-1
