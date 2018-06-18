@@ -13,13 +13,16 @@
     dialog_groups:
     - description: 
       display: 
-      label: Basic information
+      label: Información basica
       display_method: 
       display_method_options: 
       position: 0
       dialog_fields:
       - name: directory_name
-        description: ''
+        description: |-
+          NFS Alias
+          Cadena de texto (sin espacios), Necesita ser validado, valida si existe.
+          Directorio máximo Nombre permitido = 256 caracteres, (String)
         data_type: string
         notes: 
         notes_display: 
@@ -29,13 +32,13 @@
         required: true
         required_method: 
         required_method_options: {}
-        default_value: ''
+        default_value: "/"
         values: 
         values_method: 
         values_method_options: {}
         options:
           :protected: false
-        label: Export Name
+        label: Nombre del directorio
         position: 0
         validator_type: 
         validator_rule: 
@@ -57,9 +60,11 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
-    - description: Description
+    - description: |-
+        Cuota Alta
+        Valores preestablecidos (1, 2, 5 GB) para esta prueba.
       display: edit
-      label: Quota
+      label: Cuota
       display_method: 
       display_method_options: 
       position: 1
@@ -75,7 +80,7 @@
         required: false
         required_method: 
         required_method_options: {}
-        default_value: '1073741824'
+        default_value: '5368709120'
         values:
         - - 
           - "<None>"
@@ -91,7 +96,7 @@
           :sort_by: description
           :sort_order: ascending
           :force_multi_value: false
-        label: Hard Quota
+        label: Cuota Alta
         position: 0
         validator_type: 
         validator_rule: 
@@ -140,7 +145,7 @@
           :sort_by: description
           :sort_order: ascending
           :force_multi_value: false
-        label: Soft Quota
+        label: Cuota baja
         position: 1
         validator_type: 
         validator_rule: 
@@ -162,9 +167,10 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
-    - description: Description
+    - description: IP o subredes para cada uno de los privilegios (Lectura/escritura,
+        Lectura/solo, Raíz)
       display: edit
-      label: IPs and Permissions
+      label: IPs y Permisos
       display_method: 
       display_method_options: 
       position: 2
@@ -177,7 +183,7 @@
         display: edit
         display_method: 
         display_method_options: {}
-        required: false
+        required: true
         required_method: 
         required_method_options: {}
         default_value: ''
@@ -186,10 +192,10 @@
         values_method_options: {}
         options:
           :protected: false
-        label: Read Olny IPs
+        label: IPs solo Lectura
         position: 0
         validator_type: 
-        validator_rule: 
+        validator_rule: "/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/"
         reconfigurable: false
         dynamic: false
         show_refresh_button: false
@@ -225,10 +231,10 @@
         values_method_options: {}
         options:
           :protected: false
-        label: Read/Write IPs
+        label: IPs Lectura/Escritura
         position: 1
         validator_type: 
-        validator_rule: 
+        validator_rule: "/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/"
         reconfigurable: false
         dynamic: false
         show_refresh_button: false
@@ -264,10 +270,10 @@
         values_method_options: {}
         options:
           :protected: false
-        label: Root IPs
+        label: IPs Raiz
         position: 2
         validator_type: 
-        validator_rule: 
+        validator_rule: "/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/"
         reconfigurable: false
         dynamic: false
         show_refresh_button: false
