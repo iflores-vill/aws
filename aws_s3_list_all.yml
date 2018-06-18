@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
   gather_facts: False
-  connection: local
-- aws_s3_bucket_facts:
+  connection: local    
+  tasks:
+     - aws_s3_bucket_facts:
+         register: s3_buckets
