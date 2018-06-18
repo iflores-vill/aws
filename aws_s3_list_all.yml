@@ -3,5 +3,4 @@
   gather_facts: False
   connection: local    
   tasks:
-     - aws_s3_bucket_facts:
-         register: s3_buckets
+     - aws_s3_bucket_facts
