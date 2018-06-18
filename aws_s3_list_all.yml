@@ -4,6 +4,4 @@
   connection: local
   tasks:
     - name: Listar S3 Bucket
-      aws_s3:
-        bucket: "{{ bucket_name }}"
-        mode: list
+- aws_s3_bucket_facts:
