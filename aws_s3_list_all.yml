@@ -9,4 +9,4 @@
         #aws_access_key: some_key
         #aws_secret_key: some_secret_key
         validate_certs: no
-        #region: ca-central-1
+        region: ca-central-1
