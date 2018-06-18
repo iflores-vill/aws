@@ -5,8 +5,8 @@
   tasks:
     - name: Listar todos los S3 Bucket
       aws_s3_bucket_facts:
-        #ec2_url: ec2.ap-southeast-1.amazonaws.com
-        #aws_access_key: AKIAIPCW6HHN6CMIXYLA
-        #aws_secret_key: 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
+        #ec2_url: some_aws_region
+        #aws_access_key: some_key
+        #aws_secret_key: some_secret_key
         validate_certs: no
-        region: ca-central-1
+        #region: ca-central-1
