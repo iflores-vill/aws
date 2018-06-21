@@ -1,2 +1,3 @@
-- hosts: localhost
-    msg: "El bucket {{ bucket_name }} ya existe."
+- name: Valida existencia de bucket
+  debug:
+    msg: "El bucket {{ bucket_name }} no existe."
