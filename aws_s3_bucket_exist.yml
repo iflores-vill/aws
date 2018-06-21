@@ -1,2 +1,2 @@
-- host: localhost
+- hosts: localhost
     msg: "El bucket {{ bucket_name }} ya existe."
