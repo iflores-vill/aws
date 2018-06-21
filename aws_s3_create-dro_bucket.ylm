@@ -9,16 +9,16 @@
         method: POST
         validate_certs: no
         headers:
-          X-Auth-Token: "{{ manageiq.api_token }}"
-          Content-Type:  application/json
+         X-Auth-Token: "{{ manageiq.api_token }}"
+         Content-Type:  application/json
         body_format: json
         body:
-          action: create
-          name: "{{ bucket_name }}"
-          generic_object_definition:
-            href: "{{ manageiq.api_url }}/api/generic_object_definitions/1"
-          property_attributes:
-            dro_bucket_name : "{{ bucket_name }}"
-            dro_bucket_permission: "{{ bucket_permission }}"
-            #dro_bucket_keys: "{{  }}"
-      register: dro
+         action: create
+         name: "{{ bucket_name }}"
+         generic_object_definition:
+          href: "{{ manageiq.api_url }}/api/generic_object_definitions/1"
+         property_attributes:
+          dro_bucket_name : "{{ bucket_name }}"
+          dro_bucket_permission: "{{ bucket_permission }}"
+          #dro_bucket_keys: "{{  }}"
+       register: dro
