@@ -21,7 +21,7 @@
           dro_bucket_name: "{{ bucket_name }}"
           dro_bucket_permission: "{{ bucket_permission }}"
           #dro_bucket_keys: "{{ bucket_keys }}"
-        associations:
-          service:
-          - href: "{{ service.json.resources|last|json_query('href') }}"
+        #associations:
+        #  service:
+        #  - href: "{{ service.json.resources|last|json_query('href') }}"
     register: dro
