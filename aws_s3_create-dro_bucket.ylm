@@ -3,7 +3,6 @@
   gather_facts: False
   connection: local
   tasks:
-    - name: Crear S3 Bucket
     - name: Create DRO entry for AWS S3
        uri:
          url: "{{ manageiq.api_url }}/api/generic_objects"
