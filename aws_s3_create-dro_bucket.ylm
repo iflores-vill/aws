@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  gather_facts: False 
+  connection: local
   tasks:
   - name: Get services
     uri:
@@ -13,7 +15,7 @@
         Content-Type: "application/json"
     register: service
 
-  - name: Create DRO entry
+  - name: Create DRO entry for AWS S3
     uri:
       url: "{{ manageiq.api_url }}/api/generic_objects"
       method: POST
@@ -28,15 +30,14 @@
         generic_object_definition:
           href: "{{ manageiq.api_url }}/api/generic_object_definitions/10000000000001"
         property_attributes:
-          haproxy_port: "{{ haproxy_port }}"
-          host1: "{{ hostvars[groups['web'][0]]['ansible_all_ipv4_addresses'][0] }}"
-          host2: "{{ hostvars[groups['web'][1]]['ansible_all_ipv4_addresses'][0] }}"
-          lb_address: "{{ hostvars[groups['haproxy'][0]]['ansible_all_ipv4_addresses'][0] }}"
+          dro_bucket_name: "{{ bucket_name }}"
+          dro_bucket_permission: "{{ bucket_permission }}"
+          #dro_bucket_keys: "{{ bucket_keys }}"
         associations:
           service:
           - href: "{{ service.json.resources|last|json_query('href') }}"
     register: dro
-  - name: add generic object to service
+  - name: Add generic object to service
     uri:
       url: "{{ service.json.resources|last|json_query('href') }}"
       method: POST
