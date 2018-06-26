@@ -8,3 +8,4 @@
         bucket: "{{ bucket_name }}"
         mode: create
         permission: "{{ bucket_permission }}"
+        region: ca-central-1
