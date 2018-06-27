@@ -11,8 +11,7 @@
         region: ca-central-1
       register: bucket_creation_register
   tasks:
-    - name: Create DRO entry for AWS S3
-      msg: "El DRO se creara exitosamente."
+    - msg: "El DRO se creara exitosamente."
       register: dro
       #when: bucket_creation_register
       notify: "Crear S3 Bucket"
