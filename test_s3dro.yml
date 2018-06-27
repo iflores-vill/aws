@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  gather_facts: False
+  connection: local
+  handlers:
+    - name: Crear S3 Bucket
+      aws_s3:
+        bucket: "{{ bucket_name }}"
+        mode: create
+        permission: "{{ bucket_permission }}"
+        region: ca-central-1
+      register: bucket_creation_register
+  tasks:
+    - name: Create DRO entry for AWS S3
+      msg: "El DRO se creara exitosamente."
+      register: dro
+      #when: bucket_creation_register
+      notify: "Crear S3 Bucket"
