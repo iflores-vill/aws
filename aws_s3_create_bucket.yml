@@ -2,15 +2,19 @@
 - hosts: localhost
   gather_facts: False
   connection: local
-  handlers:
+  tasks:
     - name: Crear S3 Bucket
       aws_s3:
+        ignore_nonexistent_bucket: True
         bucket: "{{ bucket_name }}"
         mode: create
         permission: "{{ bucket_permission }}"
         region: ca-central-1
-      register: bucket_creation_register
-  tasks:
+      notify: 
+        - Create DRO entry for AWS S3
+        - Add DRO to service
+        
+  handlers:
     - name: Create DRO entry for AWS S3
       uri:
         url: "{{ manageiq.api_url }}/api/generic_objects"
@@ -34,10 +38,8 @@
             #- href: "{{ service.json.resources|last|json_query('href') }}"
             - href: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
       register: dro
-      #when: bucket_creation_register
-      notify: "Crear S3 Bucket"
-     
-    - name: Add generic object to service
+           
+    - name: Add DRO to service
       uri:
         #url: "{{ service.json.resources|last|json_query('href') }}"
         url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
@@ -51,6 +53,4 @@
           action: add_resource
           resource:
             resource:
-              href: "{{ dro.json.results[0].href }}"
-      #when: bucket_creation_register 
-      notify: "Crear S3 Bucket"
+              href: "{{ dro.json.results[0].href }}"    
