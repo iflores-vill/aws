@@ -9,8 +9,13 @@
         mode: create
         permission: "{{ bucket_permission }}"
         region: ca-central-1
-      register: bucket_creation_register
   tasks:
+    - name: Crear S3 Bucket
+      aws_s3:
+        bucket: "{{ bucket_name }}"
+        mode: create
+        permission: "{{ bucket_permission }}"
+        region: ca-central-1
     - debug:
         msg: "El DRO {{ bucket_name }} se creara exitosamente."
       register: dro
