@@ -5,6 +5,7 @@
   tasks:
     - name: Crear S3 Bucket
       aws_s3:
+        ignore_nonexistent_bucket: True
         bucket: "{{ bucket_name }}"
         mode: create
         permission: "{{ bucket_permission }}"
