@@ -11,8 +11,8 @@
         permission: "{{ bucket_permission }}"
         region: ca-central-1
       notify: 
-        - Create DRO entry for AWS S3
-        - Add DRO to service
+         - "Create DRO entry for AWS S3"
+         - "Add DRO to service"
         
   handlers:
     - name: Create DRO entry for AWS S3
