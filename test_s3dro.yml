@@ -2,13 +2,6 @@
 - hosts: localhost
   gather_facts: False
   connection: local
-  handlers:
-    - name: Crear S3 Bucket
-      aws_s3:
-        bucket: "{{ bucket_name }}"
-        mode: create
-        permission: "{{ bucket_permission }}"
-        region: ca-central-1
   tasks:
     - name: Crear S3 Bucket
       aws_s3:
@@ -16,7 +9,8 @@
         mode: create
         permission: "{{ bucket_permission }}"
         region: ca-central-1
+      register: bucket_creation
     - debug:
         msg: "El DRO {{ bucket_name }} se creara exitosamente."
       register: dro
-      notify: "Crear S3 Bucket"
+      when: bucket_creation
