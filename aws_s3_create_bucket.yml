@@ -10,9 +10,7 @@
         mode: create
         permission: "{{ bucket_permission }}"
         region: ca-central-1
-      notify: 
-         - "Create DRO entry for AWS S3"
-         - "Add DRO to service"
+      notify: Create and attach DRO to service
         
   handlers:
     - name: Create DRO entry for AWS S3
@@ -38,6 +36,7 @@
             #- href: "{{ service.json.resources|last|json_query('href') }}"
             - href: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
       register: dro
+      listen: "Create and attach DRO to service"
            
     - name: Add DRO to service
       uri:
@@ -54,3 +53,4 @@
           resource:
             resource:
               href: "{{ dro.json.results[0].href }}"    
+      listen: "Create and attach DRO to service"
