@@ -34,7 +34,7 @@
             #- href: "{{ service.json.resources|last|json_query('href') }}"
             - href: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
       register: dro
-      when: bucke_creation_register
+      when: bucket_creation_register
      
     - name: Add generic object to service
       uri:
