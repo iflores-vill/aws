@@ -3,7 +3,6 @@
   hosts: localhost
 
   tasks:
-
   - name: Find the generic objects that belong to this service
     uri:
       url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}?attributes=generic_objects"
