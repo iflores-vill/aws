@@ -11,7 +11,7 @@
         region: ca-central-1
       register: bucket_creation_register
   tasks:
-    - msg: "El DRO se creara exitosamente."
+    - debug:
+        msg: "El DRO {{ bucket_name }} se creara exitosamente."
       register: dro
-      #when: bucket_creation_register
       notify: "Crear S3 Bucket"
