@@ -8,8 +8,8 @@
         bucket: "{{ bucket_name }}"
         mode: create
         permission: "{{ bucket_permission }}"
-        region: ca-central-1
       register: bucket_creation
+      
     - debug:
         msg: "El DRO {{ bucket_name }} se creara exitosamente."
       register: dro
