@@ -1,8 +1,0 @@
----
-- hosts: localhost
-  gather_facts: False
-  connection: local
-  tasks:
-    - name: Valida existencia de bucket
-      debug:
-        msg: "El bucket {{ bucket_name }} no existe."
