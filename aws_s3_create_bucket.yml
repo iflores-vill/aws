@@ -26,7 +26,7 @@
           action: create
           name: "{{ bucket_name }}"
           generic_object_definition:
-            href: "{{ manageiq.api_url }}/api/generic_object_definitions/99000000000001"
+            href: "{{ manageiq.api_url }}/api/generic_object_definitions/1000000000001"
           property_attributes:
             dro_bucket_name: "{{ bucket_name }}"
             dro_bucket_permission: "{{ bucket_permission }}"
