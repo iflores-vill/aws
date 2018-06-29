@@ -14,7 +14,8 @@
       register: getbucketname
   
     - name: Eliminar S3 Bucket
-      debug: msg: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
+      debug: 
+        msg: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
       aws_s3:
         bucket: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
         mode: delete
