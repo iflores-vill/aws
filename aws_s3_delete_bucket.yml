@@ -3,9 +3,20 @@
   gather_facts: False
   connection: local
   tasks:
+    - name: Get Bucket Name
+       uri:
+         url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
+         method: GET
+         validate_certs: no
+         headers:
+           X-Auth-Token: "{{ manageiq.api_token }}"
+         body_format: json
+       register: getbucketname
+  
     - name: Eliminar S3 Bucket
+      debug: msg: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
       aws_s3:
-        bucket: "{{ bucket_name }}"
+        bucket: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
         mode: delete
       notify: Delete resources and DROs from service
   
