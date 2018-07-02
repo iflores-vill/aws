@@ -20,9 +20,9 @@
       aws_s3:
         bucket: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
         mode: delete
-      notify: Delete resources and DROs from service
+      #notify: Delete resources and DROs from service
   
-  handlers:
+  #handlers:
     - name: Find DROs that belong to this service
       uri:
         url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}?attributes=generic_objects"
@@ -32,14 +32,14 @@
           X-Auth-Token: "{{ manageiq.api_token }}"
         body_format: json
       register: service
-      listen: "Delete resources and DROs from service"
+      #listen: "Delete resources and DROs from service"
     
     - set_fact:
         generic_objects: "{{ service.json.generic_objects }}"
         
     - debug:
         msg: "{{ generic_objects }"
-        #msg: "{{ service.json.generic_objects }}"
+        msg: "{{ service.json.generic_objects }}"
       
     #- name: Remove the resources from the service
       #uri:
