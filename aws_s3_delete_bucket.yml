@@ -34,36 +34,36 @@
       register: service
       listen: "Delete resources and DROs from service"
     
-    - set_fact:
-        generic_objects: "{{ service.json.generic_objects }}"
+    #- set_fact:
+        #generic_objects: "{{ service.json.generic_objects }}"
         
     - debug: 
         msg: "{{ service.json.generic_objects }}"
       
-    - name: Remove the resources from the service
-      uri:
-        url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
-        method: POST
-        validate_certs: no
-        headers:
-          X-Auth-Token: "{{ manageiq.api_token }}"
-        body_format: json
-        body:
-          action: remove_resource
-          resource:
-            resource:
-              href: "{{ item.href }}"
-      with_items: "{{ generic_objects }}"
+    #- name: Remove the resources from the service
+      #uri:
+        #url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
+        #method: POST
+        #validate_certs: no
+        #headers:
+          #X-Auth-Token: "{{ manageiq.api_token }}"
+        #body_format: json
+        #body:
+          #action: remove_resource
+          #resource:
+            #resource:
+              #href: "{{ item.href }}"
+      #with_items: "{{ generic_objects }}"
   
-    - name: Delete the DROs
-      uri:
-        url: "{{ item.href }}"
-        method: POST
-        validate_certs: no
-        headers:
-          X-Auth-Token: "{{ manageiq.api_token }}"
-        body_format: json
-        body:
-          action: delete
-      with_items: "{{ generic_objects }}"
-      listen: "Delete resources and DROs from service"
+    #- name: Delete the DROs
+      #uri:
+        #url: "{{ item.href }}"
+        #method: POST
+        #validate_certs: no
+        #headers:
+          #X-Auth-Token: "{{ manageiq.api_token }}"
+        #body_format: json
+        #body:
+          #action: delete
+      #with_items: "{{ generic_objects }}"
+      #listen: "Delete resources and DROs from service"
