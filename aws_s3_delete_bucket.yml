@@ -38,6 +38,9 @@
     
     - set_fact:
         generic_objects: "{{ service.json.generic_objects }}"
+        
+    - debug: 
+        msg: "{{ generic_objects }}"
       
     - name: Remove the resources from the service
       uri:
