@@ -38,8 +38,8 @@
         generic_objects: "{{ service.json.generic_objects }}"
         
     - debug:
-        #msg: "{{ generic_objects }"
-        msg: "{{ service.json.generic_objects }}"
+        msg: "{{ generic_objects }"
+        #msg: "{{ service.json.generic_objects }}"
       
     #- name: Remove the resources from the service
       #uri:
