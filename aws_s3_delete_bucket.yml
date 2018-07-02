@@ -13,16 +13,13 @@
         body_format: json
       register: getbucketname
    
-    - debug: 
-        msg: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
-  
     - name: Eliminar S3 Bucket
       aws_s3:
         bucket: "{{ getbucketname.json.options.provision_job_options.extra_vars.bucket_name }}"
         mode: delete
-      #notify: Delete resources and DROs from service
+      notify: Delete resources and DROs from service
   
-  #handlers:
+  handlers:
     - name: Find DROs that belong to this service
       uri:
         url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}?attributes=generic_objects"
@@ -31,40 +28,36 @@
         headers:
           X-Auth-Token: "{{ manageiq.api_token }}"
         body_format: json
-      register: service
-      #listen: "Delete resources and DROs from service"
+      register: getdros
+      listen: "Delete resources and DROs from service"
     
     - set_fact:
-        generic_objects: "{{ service.json.generic_objects }}"
-        
-    - debug:
-        msg: "{{ generic_objects }"
-        #msg: "{{ service.json.generic_objects }}"
+        generic_objects: "{{ getdros.json.generic_objects }}"
       
-    #- name: Remove the resources from the service
-      #uri:
-        #url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
-        #method: POST
-        #validate_certs: no
-        #headers:
-          #X-Auth-Token: "{{ manageiq.api_token }}"
-        #body_format: json
-        #body:
-          #action: remove_resource
-          #resource:
-            #resource:
-              #href: "{{ item.href }}"
-      #with_items: "{{ generic_objects }}"
+    - name: Remove the resources from the service
+      uri:
+        url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
+        method: POST
+        validate_certs: no
+        headers:
+          X-Auth-Token: "{{ manageiq.api_token }}"
+        body_format: json
+        body:
+          action: remove_resource
+          resource:
+            resource:
+              href: "{{ item.href }}"
+      with_items: "{{ getdros.json.generic_objects }}"
   
-    #- name: Delete the DROs
-      #uri:
-        #url: "{{ item.href }}"
-        #method: POST
-        #validate_certs: no
-        #headers:
-          #X-Auth-Token: "{{ manageiq.api_token }}"
-        #body_format: json
-        #body:
-          #action: delete
-      #with_items: "{{ generic_objects }}"
-      #listen: "Delete resources and DROs from service"
+    - name: Delete the DROs
+      uri:
+        url: "{{ item.href }}"
+        method: POST
+        validate_certs: no
+        headers:
+          X-Auth-Token: "{{ manageiq.api_token }}"
+        body_format: json
+        body:
+          action: delete
+      with_items: "{{ getdros.json.generic_objects }}"
+      listen: "Delete resources and DROs from service"
