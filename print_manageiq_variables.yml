@@ -1,0 +1,11 @@
+--
+- hosts: all
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - debug: var=manageiq.api_url
+    - debug: var=manageiq.api_token
+    - debug: var=manageiq.service
+    - debug: msg:"{{ manageiq.service }}"
+    - debug: msg:"{{ manageiq.api_url }}"
