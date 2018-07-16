@@ -15,7 +15,5 @@
         body:
           action: add
           resources:
-            name: "Nombre Bucket S3"
+            - name: "Nombre Bucket S3"
               value: "{{ bucket_name }}"
-            name: "Otro Campo"
-              value: "Otro valor"
