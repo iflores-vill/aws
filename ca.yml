@@ -3,7 +3,7 @@
   gather_facts: False
   connection: local
   tasks:
-    - name: Add CA to service
+    - name: Add TAGs to service
       uri:
         url: https://192.168.122.146/api/services/99000000000072/custom_attributes
         method: POST
@@ -13,11 +13,7 @@
           Content-Type:  application/json
         body_format: json
         body:
-          action: add
+          action: assign
           resources:
-            - name: "Nombre Bucket S3"
-              value: "Bla bla Bucket"
-            - name: "Nombre Otro S3"
-              value: "Bla bla Bucket"
-            - name: "Nombro Otro Mas S3"
-              value: "Bla bla Bucket"
+            - name: "Storage Mapping"
+              value: "Storage 1"
