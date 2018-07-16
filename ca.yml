@@ -17,3 +17,7 @@
           resources:
             - name: "Nombre Bucket S3"
               value: "Bla bla Bucket"
+            - name: "Nombre Otro S3"
+              value: "Bla bla Bucket"
+            - name: "Nombro Otro Mas S3"
+              value: "Bla bla Bucket"
