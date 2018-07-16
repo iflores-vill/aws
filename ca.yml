@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  gather_facts: False
+  connection: local
+  tasks:
+     - name: Add CA to service
+      uri:
+        url: "{{ https://192.168.122.146/api/services/99000000000072/custom_attributes }}"
+        method: POST
+        validate_certs: no
+        headers:
+          X-Auth-Token: "{{ manageiq.api_token }}"
+          Content-Type:  application/json
+        body_format: json
+        body:
+          action: add
+          resources:
+            name: "Nombre Bucket S3"
+              value: "{{ bucket_name }}"
+            name: "Otro Campo"
+              value: "Otro valor"
