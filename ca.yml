@@ -5,7 +5,7 @@
   tasks:
     - name: Add TAGs to service
       uri:
-        url: https://192.168.122.146/api/services/99000000000072/custom_attributes
+        url: https://192.168.122.146/api/services/99000000000072/tags
         method: POST
         validate_certs: no
         headers:
