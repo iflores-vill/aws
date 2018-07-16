@@ -3,7 +3,7 @@
   gather_facts: False
   connection: local
   tasks:
-     - name: Add CA to service
+    - name: Add CA to service
       uri:
         url: "{{ https://192.168.122.146/api/services/99000000000072/custom_attributes }}"
         method: POST
