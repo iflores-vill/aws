@@ -15,5 +15,5 @@
         body:
           action: assign
           resources:
-            - name: "Storage Mapping"
-              value: "Storage 1"
+            - category: "Storage Mapping"
+              name: "Storage 1"
