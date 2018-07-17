@@ -10,8 +10,7 @@
         mode: create
         permission: "{{ bucket_permission }}"
         region: ca-central-1
-      notify: Create and attach DRO to service
-      notify: Add Custom Attributes and assing TAGs to S3
+      notify: "Create and attach DRO to service" "Add Custom Attributes and assing TAGs to S3"
         
   handlers:
     - name: Create DRO entry for AWS S3
