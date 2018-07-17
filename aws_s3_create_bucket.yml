@@ -5,7 +5,6 @@
   tasks:
     - name: Crear S3 Bucket
       aws_s3:
-        #ignore_nonexistent_bucket: True
         bucket: "{{ bucket_name }}"
         mode: create
         permission: "{{ bucket_permission }}"
@@ -35,14 +34,12 @@
             #dro_bucket_keys: "{{ bucket_keys }}"
           associations:
             service:
-            #- href: "{{ service.json.resources|last|json_query('href') }}"
             - href: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
       register: dro
       listen: "Create and attach DRO to service"
            
     - name: Add DRO to service
       uri:
-        #url: "{{ service.json.resources|last|json_query('href') }}"
         url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
         method: POST
         validate_certs: no
@@ -102,3 +99,5 @@
             - name: "Versión"
               value: "{{ version_proyecto }}"
       listen: "Add Custom Attributes and assing TAGs to S3"
+ ...
+ 
