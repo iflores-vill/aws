@@ -15,5 +15,5 @@
         body:
           action: assign
           resources:
-            - category: "Environment"
-              name: "Test"
+            - category: "environment"
+              name: "test"
