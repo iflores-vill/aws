@@ -1,4 +1,3 @@
-
 ---
 - hosts: localhost
   gather_facts: False
@@ -6,7 +5,7 @@
   tasks:
     - name: "Tarea ejemplo"
       # Ejemplo
-      notify: Assing TAGs to service
+      notify: Add Custom Attributes and assing TAGs to service
         
   handlers:
     - name: Add TAGs to service
@@ -27,4 +26,28 @@
               name: "senha_privada_vmware"
             - category: "senha_arq_mat"
               name: "senha_mat_rhel7"
-      listen: "Assing TAGs to service"
+      listen: "Add Custom Attributes and assing TAGs to service"
+     
+    - name: Add Custom Attributes to service
+      uri:
+        url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}/custom_attributes"
+        method: POST
+        validate_certs: no
+        headers:
+          X-Auth-Token: "{{ manageiq.api_token }}"
+          Content-Type:  application/json
+        body_format: json
+        body:
+          action: add
+          resources:
+            - name: "Work Order"
+              value: "{{ numero_de_ticket  }}"
+            - name: "General"
+              value: "{{ nomre_general  }}"
+            - name: "Central"
+              value: "{{ nombre_central  }}"
+            - name: "Aplicación"
+              value: "{{ nombre_aplicacion }}"
+            - name: "Versión"
+              value: "{{ version_proyecto }}"
+      listen: "Add Custom Attributes and assing TAGs to service"
