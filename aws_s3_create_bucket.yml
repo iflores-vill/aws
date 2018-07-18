@@ -93,9 +93,11 @@
               #value: "{{ nombre_central  }}"
               value: "Central 01"
             - name: "Aplicación"
-              value: "{{ nombre_aplicacion }}"
+              #value: "{{ nombre_aplicacion }}"
+              value: "App S3"
             - name: "Versión"
-              value: "{{ version_proyecto }}"
+              #value: "{{ version_proyecto }}"
+              value: "1.0"
       listen: "Create and attach DRO + Add Custom Attributes and assing TAGs to service"
  ...
  
