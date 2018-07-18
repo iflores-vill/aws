@@ -9,10 +9,8 @@
         mode: create
         permission: "{{ bucket_permission }}"
         region: ca-central-1
-      notify:
-         - Create and attach DRO to service
-         - Add Custom Attributes and assing TAGs to S3
-        
+      notify: Create and attach DRO + Add Custom Attributes and assing TAGs to service        
+  
   handlers:
     - name: Create DRO entry for AWS S3
       uri:
@@ -36,7 +34,7 @@
             service:
             - href: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
       register: dro
-      listen: "Create and attach DRO to service"
+      listen: "Create and attach DRO + Add Custom Attributes and assing TAGs to service"
            
     - name: Add DRO to service
       uri:
@@ -52,7 +50,7 @@
           resource:
             resource:
               href: "{{ dro.json.results[0].href }}"    
-      listen: "Create and attach DRO to service"
+      listen: "Create and attach DRO + Add Custom Attributes and assing TAGs to service"
      
     - name: Add TAGs to S3
       uri:
@@ -72,7 +70,7 @@
               name: "senha_publica_aws"
             - category: "senha_almacenamiento"
               name: "senha_almacenamiento_s3"
-      listen: "Add Custom Attributes and assing TAGs to S3"
+      listen: "Create and attach DRO + Add Custom Attributes and assing TAGs to service"
      
     - name: Add Custom Attributes to S3
       uri:
@@ -98,6 +96,6 @@
               value: "{{ nombre_aplicacion }}"
             - name: "Versión"
               value: "{{ version_proyecto }}"
-      listen: "Add Custom Attributes and assing TAGs to S3"
+      listen: "Create and attach DRO + Add Custom Attributes and assing TAGs to service"
  ...
  
