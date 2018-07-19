@@ -18,7 +18,7 @@
         shell: /bin/bash
         groups: wheel
         append: yes
-        #password:
-        update_password: "{{ user_pass.stdout }}"
-      register: adduser_adminsenha
+        password: "{{ user_pass.stdout }}"
+        update_password: always
+      #register: adduser_adminsenha
       #listen: "Create, change and notify users"
