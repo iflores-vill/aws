@@ -15,6 +15,6 @@
     - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
       shell: date | sha256sum | base64 | head -c 16
       register: user_pass
-      debug
-       msg: El password es {{ user_pass }}
+       debug
+        msg: El password es {{ user_pass }}
       listen: "Create, change and notify users"
