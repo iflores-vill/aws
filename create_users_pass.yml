@@ -15,9 +15,9 @@
     - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
       user:
         name: adminsenhados
-        shell: /bin/bash
-        groups: wheel
-        append: yes
+        #shell: /bin/bash
+        #groups: wheel
+        #append: yes
         #password: "{{ user_pass.stdout }}"
         password: redhat2018
         update_password: always
