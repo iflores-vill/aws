@@ -19,7 +19,7 @@
         groups: wheel
         append: yes
         #password: "{{ user_pass.stdout }}"
-        password: "redhat2018"
+        password: redhat2018
         update_password: always
       #register: adduser_adminsenha
       #listen: "Create, change and notify users"
