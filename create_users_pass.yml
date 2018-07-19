@@ -18,4 +18,4 @@
       #listen: "Create, change and notify users"
       
     - debug:
-        msg: El password es "{{ user_pass.stdout }}"
+        msg: El password es "{{ user_pass.stdout_lines }}"
