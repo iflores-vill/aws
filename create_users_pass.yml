@@ -14,7 +14,7 @@
         
     - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
       user:
-        name: adminsenha
+        name: adminsenhados
         shell: /bin/bash
         groups: wheel
         append: yes
