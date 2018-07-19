@@ -1,0 +1,22 @@
+---
+- hosts: Test_VM
+  gather_facts: False
+#  connection: local
+  tasks:
+    - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
+      user:
+        name: adminsenha
+        shell: /bin/bash
+        groups: whell
+        append: yes
+      register: adduser_adminsenha
+      listen: "Create, change and notify users"
+    
+    - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
+      shell: date | sha256sum | base64 | head -c 16
+      register: user_pass
+      listen: "Create, change and notify users"
+    - debug
+      msg: El password es {{ user_pass }}
+...
+   
