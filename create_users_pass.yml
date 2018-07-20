@@ -10,7 +10,7 @@
       #listen: "Generar usuarios y comunicar passwords"
     
     - set_fact:
-        vmware_template_presentacion: "Plantilla_OEL_7.4_OHS"
+        vmware_template_presentacion: "Plantilla_RHEL_7.4_OHS"
         vmware_template_procesamiento: "Plantilla"
         vmware_template_datos: "Plantilla"
       
