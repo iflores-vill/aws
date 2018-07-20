@@ -3,14 +3,19 @@
   gather_facts: False
   #connection: local
   tasks:
-    - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
+    - name: Generar password/semilla
       shell: date | sha256sum | base64 | head -c 16
-      register: user_pass
+      register: pass_sed
       #no_log: true
       #listen: "Create, change and notify users"
+  
+    - name: Genera el hash 
+      shell: openssl passwd -1 -salt "{{ pass_sed.stdout }}" "{{ pass_sed.stdout }}"
+      register: user_pass
+      #no_log: true
       
-    #- debug:
-        #msg: El password es {{ user_pass.stdout }}
+    - debug:
+        msg: El password es {{ user_pass.stdout }}
         
     - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
       user:
@@ -23,7 +28,7 @@
         shell: /bin/bash
         groups: wheel
         append: yes
-        password: "$1$3Zdze7Vx$QSwEwNDXXsM2opYRd9Cdl0"
+        password: "{{ user_pass.stdout }}"
         update_password: always
       #register: adduser_adminsenha
       #listen: "Create, change and notify users"
