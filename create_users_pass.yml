@@ -6,11 +6,11 @@
     - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
       shell: date | sha256sum | base64 | head -c 16
       register: user_pass
-      no_log: true
+      #no_log: true
       #listen: "Create, change and notify users"
       
-    - debug:
-        msg: El password es {{ user_pass.stdout }}
+    #- debug:
+        #msg: El password es {{ user_pass.stdout }}
         
     - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
       user:
