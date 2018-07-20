@@ -7,8 +7,7 @@
       shell: date | sha256sum | base64 | head -c 16
       register: contra_sem
       no_log: true
-      #listen: "Generar usuarios y comunicar passwords"
-    
+        
     - name: OS RHEL
       shell: grep "Red Hat" /etc/*release
       register: rhel_os
@@ -23,10 +22,7 @@
       shell: openssl passwd -1 -salt "{{ contra_sem.stdout }}" "{{ contra_sem.stdout }}"
       register: usu_contra
       no_log: true
-      
-    - debug:
-        msg: "La contraseña es de adminsenha es: {{ contra_sem.stdout }} y el hash: {{ usu_contra.stdout }}"
-        
+
     - name: Genera usuario 'adminsenha' y se agrega a grupo wheel
       user:
         name: adminsenha
@@ -36,14 +32,12 @@
         password: "{{ usu_contra.stdout }}"
         update_password: always
       register: genusu_adminsenha
-      #listen: "Generar usuarios y comunicar passwords"
-      
+            
     - name: Genera contraseña/semilla root
       shell: date | sha256sum | base64 | head -c 16
       register: contraroot_sem
       no_log: true
-      #listen: "Generar usuarios y comunicar passwords"
-  
+        
     - name: Genera el hash de root
       shell: openssl passwd -1 -salt "{{ contraroot_sem.stdout }}" "{{ contraroot_sem.stdout }}"
       register: usuroot_contra
