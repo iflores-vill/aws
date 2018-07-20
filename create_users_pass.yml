@@ -31,7 +31,6 @@
         password: "{{ usu_contra.stdout }}"
         update_password: always
       register: genusu_adminsenha
-      when: vmware_template_presentacion == "*RHEL*" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
       #listen: "Generar usuarios y comunicar passwords"
       
     - name: Generar contraseña/semilla root
@@ -54,4 +53,5 @@
         password: "{{ usuroot_contra.stdout }}"
         update_password: always
       register: modusu_root
+      when: vmware_template_presentacion == "*RHEL*" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
       
