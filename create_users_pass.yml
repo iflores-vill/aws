@@ -9,10 +9,15 @@
       no_log: true
       #listen: "Generar usuarios y comunicar passwords"
     
-    - set_fact:
-        vmware_template_presentacion: "Plantilla_RHEL_7"
-        vmware_template_procesamiento: "Plantilla"
-        vmware_template_datos: "Plantilla"
+    - name: OS RHEL
+      shell: grep "Red Hat" /etc/*release
+      register: rhel_os
+      ignore_errors: yes
+      
+    #- set_fact:
+        #vmware_template_presentacion: "Plantilla_RHEL_7"
+        #vmware_template_procesamiento: "Plantilla"
+        #vmware_template_datos: "Plantilla"
       
     - name: Genera el hash de adminsenha
       shell: openssl passwd -1 -salt "{{ contra_sem.stdout }}" "{{ contra_sem.stdout }}"
@@ -47,11 +52,14 @@
     - debug:
         msg: "La contraseña es de root es: {{ contraroot_sem.stdout }} y el hash: {{ usuroot_contra.stdout }}"
         
-    - name: "Modificación de contraseña root"
-      user:
-        name: root
-        password: "{{ usuroot_contra.stdout }}"
-        update_password: always
-      register: modusu_root
-      when: vmware_template_presentacion == "Plantilla_RHEL_7" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
+    - debug:
+        msg: "La salida {{ rhel_os.stdout }}"
+        
+#    - name: "Modificación de contraseña root"
+#      user:
+#        name: root
+#        password: "{{ usuroot_contra.stdout }}"
+#        update_password: always
+#      register: modusu_root
+#      when: vmware_template_presentacion == "Plantilla_RHEL_7" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
       
