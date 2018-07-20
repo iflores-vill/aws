@@ -26,7 +26,7 @@
         password: "{{ usu_contra.stdout }}"
         update_password: always
       register: genusu_adminsenha
-      when: ansible_distribution == "Red Hat Enterprise Linux"
+      when: ansible_distribution == "RedHat"
       #listen: "Generar usuarios y comunicar passwords"
       
     - name: Generar contraseña/semilla root
