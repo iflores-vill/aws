@@ -14,8 +14,8 @@
       register: user_pass
       no_log: true
       
-    #- debug:
-        #msg: El password es {{ pass_sed.stdout }} y el hash {{ user_pass.stdout }}
+    - debug:
+        msg: El password es {{ pass_sed.stdout }} y el hash {{ user_pass.stdout }}
         
     - name: Genera usuario 'adminsenha' y se agrega a grupo wheel
       user:
