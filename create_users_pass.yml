@@ -10,7 +10,7 @@
       #listen: "Generar usuarios y comunicar passwords"
     
     - name: OS RHEL
-      shell: grep "Oracle" /etc/*release
+      shell: grep "Red Hat" /etc/*release
       register: rhel_os
       ignore_errors: yes
       
@@ -47,10 +47,7 @@
     - debug:
         msg: "La contraseña es de root es: {{ contraroot_sem.stdout }} y el hash: {{ usuroot_contra.stdout }}"
         
-    - debug:
-        msg: "La salida {{ rhel_os.stdout }}"
-        
-    - name: "Modificación de contraseña root"
+    - name: Modificar de contraseña root
       user:
         name: root
         password: "{{ usuroot_contra.stdout }}"
