@@ -7,7 +7,7 @@
       shell: date | sha256sum | base64 | head -c 16
       register: pass_sed
       no_log: true
-      #listen: "Create, change and notify users"
+      #listen: "Generar usuarios y comunicar passwords"
   
     - name: Genera el hash 
       shell: openssl passwd -1 -salt "{{ pass_sed.stdout }}" "{{ pass_sed.stdout }}"
@@ -19,11 +19,11 @@
         
     - name: Genera usuario 'adminsenha' y se agrega a grupo wheel
       user:
-        name: adminsenhados
+        name: adminsenha
         shell: /bin/bash
         groups: wheel
         append: yes
         password: "{{ user_pass.stdout }}"
         update_password: always
       register: adduser_adminsenha
-      #listen: "Create, change and notify users"
+      #listen: "Generar usuarios y comunicar passwords"
