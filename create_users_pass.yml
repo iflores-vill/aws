@@ -8,7 +8,10 @@
       register: contra_sem
       no_log: true
       #listen: "Generar usuarios y comunicar passwords"
-  
+    
+    - set_fact:
+        vmware_template_presentacion: "Plantilla_RHEL_7.4_OHS"
+      
     - name: Genera el hash de adminsenha
       shell: openssl passwd -1 -salt "{{ contra_sem.stdout }}" "{{ contra_sem.stdout }}"
       register: usu_contra
@@ -26,7 +29,7 @@
         password: "{{ usu_contra.stdout }}"
         update_password: always
       register: genusu_adminsenha
-      when: ansible_distribution == "RedHat"
+      when: vmware_template_presentacion == "*RHEL*" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
       #listen: "Generar usuarios y comunicar passwords"
       
     - name: Generar contraseña/semilla root
