@@ -53,5 +53,5 @@
         password: "{{ usuroot_contra.stdout }}"
         update_password: always
       register: modusu_root
-      when: vmware_template_presentacion == "*RHEL*" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
+      when: vmware_template_presentacion == "Plantilla_RHEL_7" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
       
