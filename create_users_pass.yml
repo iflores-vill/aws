@@ -15,12 +15,7 @@
       #no_log: true
       
     - debug:
-        msg: El password es {{ user_pass.stdout }}
-        
-    - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
-      user:
-        name: adminsenhados
-        remove: yes
+        msg: El password es {{ pass_sed.stdout }} y el hash {{ user_pass.stdout }}
         
     - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
       user:
