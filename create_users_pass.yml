@@ -11,6 +11,8 @@
     
     - set_fact:
         vmware_template_presentacion: "Plantilla_RHEL_7.4_OHS"
+        vmware_template_procesamiento: "Plantilla_RHEL_7.4_JBoss"
+        vmware_template_datos: "Plantilla_RHEL_7.4_MariaDB"
       
     - name: Genera el hash de adminsenha
       shell: openssl passwd -1 -salt "{{ contra_sem.stdout }}" "{{ contra_sem.stdout }}"
