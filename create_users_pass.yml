@@ -1,23 +1,23 @@
 ---
-- hosts: 192.168.122.38
+- inventory: Test_VM
   gather_facts: False
   #connection: local
   tasks:
     - name: Generar password/semilla
       shell: date | sha256sum | base64 | head -c 16
       register: pass_sed
-      #no_log: true
+      no_log: true
       #listen: "Create, change and notify users"
   
     - name: Genera el hash 
       shell: openssl passwd -1 -salt "{{ pass_sed.stdout }}" "{{ pass_sed.stdout }}"
       register: user_pass
-      #no_log: true
+      no_log: true
       
-    - debug:
-        msg: El password es {{ pass_sed.stdout }} y el hash {{ user_pass.stdout }}
+    #- debug:
+        #msg: El password es {{ pass_sed.stdout }} y el hash {{ user_pass.stdout }}
         
-    - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
+    - name: Genera usuario 'adminsenha' y se agrega a grupo wheel
       user:
         name: adminsenhados
         shell: /bin/bash
@@ -25,5 +25,5 @@
         append: yes
         password: "{{ user_pass.stdout }}"
         update_password: always
-      #register: adduser_adminsenha
+      register: adduser_adminsenha
       #listen: "Create, change and notify users"
