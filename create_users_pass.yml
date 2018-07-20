@@ -14,11 +14,6 @@
       register: rhel_os
       ignore_errors: yes
       
-    #- set_fact:
-        #vmware_template_presentacion: "Plantilla_RHEL_7"
-        #vmware_template_procesamiento: "Plantilla"
-        #vmware_template_datos: "Plantilla"
-      
     - name: Genera el hash de adminsenha
       shell: openssl passwd -1 -salt "{{ contra_sem.stdout }}" "{{ contra_sem.stdout }}"
       register: usu_contra
@@ -55,11 +50,10 @@
     - debug:
         msg: "La salida {{ rhel_os.stdout }}"
         
-#    - name: "Modificación de contraseña root"
-#      user:
-#        name: root
-#        password: "{{ usuroot_contra.stdout }}"
-#        update_password: always
-#      register: modusu_root
-#      when: vmware_template_presentacion == "Plantilla_RHEL_7" or vmware_template_procesamiento == "*RHEL*" or vmware_template_datos == "*RHEL*"
-      
+    - name: "Modificación de contraseña root"
+      user:
+        name: root
+        password: "{{ usuroot_contra.stdout }}"
+        update_password: always
+      register: modusu_root
+      when: rhel_os.rc == 0 or rhel_os.rc == 0 or rhel_os.rc == 0      
