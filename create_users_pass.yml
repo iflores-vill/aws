@@ -3,19 +3,19 @@
   gather_facts: False
   #connection: local
   tasks:
-    - name: Generar password/semilla
+    - name: Generar contraseña/semilla adminsenha
       shell: date | sha256sum | base64 | head -c 16
-      register: pass_sed
+      register: contra_sem
       no_log: true
       #listen: "Generar usuarios y comunicar passwords"
   
-    - name: Genera el hash 
-      shell: openssl passwd -1 -salt "{{ pass_sed.stdout }}" "{{ pass_sed.stdout }}"
-      register: user_pass
+    - name: Genera el hash de adminsenha
+      shell: openssl passwd -1 -salt "{{ contra_sem.stdout }}" "{{ contra_sem.stdout }}"
+      register: usu_contra
       no_log: true
       
     - debug:
-        msg: El password es {{ pass_sed.stdout }} y el hash {{ user_pass.stdout }}
+        msg: "La contraseña es de adminsenha es: {{ contra_sem.stdout }} y el hash: {{ usu_contra.stdout }}"
         
     - name: Genera usuario 'adminsenha' y se agrega a grupo wheel
       user:
@@ -23,7 +23,30 @@
         shell: /bin/bash
         groups: wheel
         append: yes
-        password: "{{ user_pass.stdout }}"
+        password: "{{ usu_contra.stdout }}"
         update_password: always
-      register: adduser_adminsenha
+      register: genusu_adminsenha
+      when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "7"
       #listen: "Generar usuarios y comunicar passwords"
+      
+    - name: Generar contraseña/semilla root
+      shell: date | sha256sum | base64 | head -c 16
+      register: contraroot_sem
+      no_log: true
+      #listen: "Generar usuarios y comunicar passwords"
+  
+    - name: Genera el hash de root
+      shell: openssl passwd -1 -salt "{{ contraroot_sem.stdout }}" "{{ contraroot_sem.stdout }}"
+      register: usuroot_contra
+      no_log: true
+      
+    - debug:
+        msg: "La contraseña es de root es: {{ contraroot_sem.stdout }} y el hash: {{ usuroot_contra.stdout }}"
+        
+    - name: "Modificación de contraseña root"
+      user:
+        name: root
+        password: "{{ usuroot_contra.stdout }}"
+        update_password: always
+      register: modusu_root
+      
