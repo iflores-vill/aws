@@ -10,7 +10,7 @@
       #listen: "Generar usuarios y comunicar passwords"
     
     - name: OS RHEL
-      shell: grep "Red Hat" /etc/*release
+      shell: grep "Oracle" /etc/*release
       register: rhel_os
       ignore_errors: yes
       
