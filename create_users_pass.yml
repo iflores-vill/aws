@@ -3,7 +3,7 @@
   gather_facts: False
   #connection: local
   tasks:
-    - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
+    - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
       shell: date | sha256sum | base64 | head -c 16
       register: user_pass
       no_log: true
@@ -12,18 +12,18 @@
     - debug:
         msg: El password es {{ user_pass.stdout }}
         
-    - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
+    - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
       user:
         name: adminsenhados
         remove: yes
         
-    - name: Add the user 'adminsenha' with a bash shell, appending the group 'whell'
+    - name: Add the user 'adminsenha' with a bash shell, appending the group 'wheel'
       user:
         name: adminsenhados
         shell: /bin/bash
         groups: wheel
         append: yes
-        password: "{{ user_pass.stdout }}"
+        password: "$1$3Zdze7Vx$QSwEwNDXXsM2opYRd9Cdl0"
         update_password: on_create
       #register: adduser_adminsenha
       #listen: "Create, change and notify users"
