@@ -3,7 +3,7 @@
   gather_facts: False
   #connection: local
   tasks:
-    - name: Generar contraseña/semilla adminsenha
+    - name: Genera contraseña/semilla adminsenha
       shell: date | sha256sum | base64 | head -c 16
       register: contra_sem
       no_log: true
@@ -12,6 +12,11 @@
     - name: OS RHEL
       shell: grep "Red Hat" /etc/*release
       register: rhel_os
+      ignore_errors: yes
+      
+    - name: OS Oracle
+      shell: grep "Oracle" /etc/*release
+      register: oel_os
       ignore_errors: yes
       
     - name: Genera el hash de adminsenha
@@ -33,7 +38,7 @@
       register: genusu_adminsenha
       #listen: "Generar usuarios y comunicar passwords"
       
-    - name: Generar contraseña/semilla root
+    - name: Genera contraseña/semilla root
       shell: date | sha256sum | base64 | head -c 16
       register: contraroot_sem
       no_log: true
@@ -47,10 +52,10 @@
     - debug:
         msg: "La contraseña es de root es: {{ contraroot_sem.stdout }} y el hash: {{ usuroot_contra.stdout }}"
         
-    - name: Modificar de contraseña root
+    - name: Modifica contraseña root
       user:
         name: root
         password: "{{ usuroot_contra.stdout }}"
         update_password: always
       register: modusu_root
-      when: rhel_os.rc == 0 or rhel_os.rc == 0 or rhel_os.rc == 0      
+      when: rhel_os.rc == 0 or oel_os.rc == 0
