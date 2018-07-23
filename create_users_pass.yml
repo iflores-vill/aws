@@ -56,12 +56,12 @@
       when: rhel_os.rc == 0 or oel_os.rc == 0
 
     - name: Notifica contraseña adminsenha base64
-      shell: "{{ contraadminsenha_sem.stdout }}" | base64
+      shell: echo "{{ contraadminsenha_sem.stdout }}" | base64
       register: notificaadminsenha_contra
       no_log: true
       
     - name: Notifica contraseña root base64
-      shell: "{{ contraroot_sem.stdout }}" | base64
+      shell: echo "{{ contraroot_sem.stdout }}" | base64
       register: notificaroot_contra
       no_log: true
       
