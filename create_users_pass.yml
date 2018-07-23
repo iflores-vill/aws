@@ -65,4 +65,6 @@
       register: notificaroot_contra
       no_log: true
       
+    - debug:
+        msg: "La contraseña base64 de root es: {{ notificaroot_contra.stdout }}"
 # Se envían por mail en las notificaciones los passwords con las variables notificaadminsenha_contra.stdout y notificaroot_contra.stdout
