@@ -67,4 +67,10 @@
       
     - debug:
         msg: "La contraseña base64 de root es: {{ notificaroot_contra.stdout }}"
+        
+    - name: Estado de la generación y notificación de usuarios/contraseñas
+      debug:
+        msg: "Los usuarios y contraseñas se generaron y notificaron de manera exitosa"
+      when: contraadminsenha_sem.rc == 0 and contraroot_sem.rc == 0 and usu_contra.rc == 0 and genusu_adminsenha.rc == 0 and contraroot_sem.rc == 0 and usuroot_contra.rc == 0 and modusu_root.rc == 0 and notificaadminsenha_contra.rc == 0 notificaroot_contra.rc == 0
+        
 # Se envían por mail en las notificaciones los passwords con las variables notificaadminsenha_contra.stdout y notificaroot_contra.stdout
