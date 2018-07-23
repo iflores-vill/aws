@@ -61,6 +61,7 @@
       shell: echo "{{ contraadminsenha_sem.stdout }}" | base64
       register: notificaadminsenha_contra
       when: genusu_adminsenha.rc == 0
+      ignore_errors: yes
       no_log: true
       
     - name: Notifica contraseña root base64
@@ -71,6 +72,9 @@
       
     - debug:
         msg: "La contraseña base64 de root es: {{ notificaroot_contra.stdout }}"
+        
+    - debug:
+        msg: "La salida de genusu_adminsenha es: {{ genusu_adminsenha }}"
         
     - name: Estado de la generación y notificación de usuarios/contraseñas
       debug:
