@@ -73,16 +73,13 @@
       
     - debug:
         msg: "La contraseña base64 de root es: {{ notificaroot_contra }}"
-        ignore_errors: yes
         
     - debug:
         msg: "La salida de genusu_adminsenha es: {{ genusu_adminsenha }}"
-        ignore_errors: yes
         
     - debug:
         msg: "La salida de modusu_root es: {{ modusu_root }}"
-        ignore_errors: yes
-        
+         
     - name: Estado de la generación y notificación de usuarios/contraseñas
       debug:
         msg: "Los usuarios y contraseñas se generaron y notificaron de manera exitosa"
