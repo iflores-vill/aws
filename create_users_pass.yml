@@ -5,7 +5,7 @@
   tasks:
     - name: Genera contraseña/semilla adminsenha
       shell: date | sha256sum | base64 | head -c 16
-      register: contra_sem
+      register: contraadminsenha_sem
       no_log: true
         
     - name: OS RHEL
@@ -19,7 +19,7 @@
       ignore_errors: yes
       
     - name: Genera el hash de adminsenha
-      shell: openssl passwd -1 -salt "{{ contra_sem.stdout }}" "{{ contra_sem.stdout }}"
+      shell: openssl passwd -1 -salt "{{ contraadminsenha_sem.stdout }}" "{{ contraadminsenha_sem.stdout }}"
       register: usu_contra
       no_log: true
 
@@ -32,6 +32,7 @@
         password: "{{ usu_contra.stdout }}"
         update_password: always
       register: genusu_adminsenha
+      when: rhel_os.rc == 0 or oel_os.rc == 0
             
     - name: Genera contraseña/semilla root
       shell: date | sha256sum | base64 | head -c 16
@@ -53,3 +54,15 @@
         update_password: always
       register: modusu_root
       when: rhel_os.rc == 0 or oel_os.rc == 0
+
+    - name: Notifica contraseña adminsenha base64
+      shell: "{{ contraadminsenha_sem.stdout }}" | base64
+      register: notificaadminsenha_contra
+      no_log: true
+      
+    - name: Notifica contraseña root base64
+      shell: "{{ contraroot_sem.stdout }}" | base64
+      register: notificaroot_contra
+      no_log: true
+      
+# Se envían por mail en las notificaciones los passwords con las variables notificaadminsenha_contra.stdout y notificaroot_contra.stdout
