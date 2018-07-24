@@ -68,8 +68,8 @@
       shell: echo "{{ contraroot_sem.stdout }}" | base64
       register: notificaroot_contra
       when: modusu_root.failed == "False"
-      ignore_errors: yes
-      no_log: true
+      #ignore_errors: yes
+      #no_log: true
       
     - debug:
         msg: "La contraseña base64 de root es: {{ notificaroot_contra.stdout }}"
@@ -84,5 +84,5 @@
       debug:
         msg: "Los usuarios y contraseñas se generaron y notificaron de manera exitosa"
       when: notificaadminsenha_contra.rc == 0 and notificaroot_contra.rc == 0     
-      ignore_errors: yes
+      #ignore_errors: yes
 # Se envían por mail en las notificaciones los passwords con las variables notificaadminsenha_contra.stdout y notificaroot_contra.stdout
