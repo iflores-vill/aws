@@ -6,7 +6,7 @@
     - name: Genera contraseña/semilla adminsenha
       shell: date | sha256sum | base64 | head -c 16
       register: contraadminsenha_sem
-      no_log: true
+      #no_log: true
         
     - name: OS RHEL
       shell: grep "Red Hat" /etc/*release
@@ -22,7 +22,7 @@
       shell: openssl passwd -1 -salt "{{ contraadminsenha_sem.stdout }}" "{{ contraadminsenha_sem.stdout }}"
       register: usu_contra
       when: contraadminsenha_sem.rc == 0
-      no_log: true
+      #no_log: true
 
     - name: Genera usuario 'adminsenha' y se agrega a grupo wheel
       user:
@@ -33,18 +33,18 @@
         password: "{{ usu_contra.stdout }}"
         update_password: always
       register: genusu_adminsenha
-      when: rhel_os.rc == 0 or oel_os.rc == 0 and usu_contra.rc == 0
+      when: (rhel_os.rc == 0 or oel_os.rc == 0) and usu_contra.failed == "False"
             
     - name: Genera contraseña/semilla root
       shell: date | sha256sum | base64 | head -c 16
       register: contraroot_sem
-      no_log: true
+      #no_log: true
         
     - name: Genera el hash de root
       shell: openssl passwd -1 -salt "{{ contraroot_sem.stdout }}" "{{ contraroot_sem.stdout }}"
       register: usuroot_contra
       when: contraroot_sem.rc == 0
-      no_log: true
+      #no_log: true
       
     - debug:
         msg: "La contraseña es de root es: {{ contraroot_sem.stdout }} y el hash: {{ usuroot_contra.stdout }}"
@@ -55,24 +55,24 @@
         password: "{{ usuroot_contra.stdout }}"
         update_password: always
       register: modusu_root
-      when: rhel_os.rc == 0 or oel_os.rc == 0 and usuroot_contra.rc == 0
+      when: (rhel_os.rc == 0 or oel_os.rc == 0) and usuroot_contra.failed == "False"
 
     - name: Notifica contraseña adminsenha base64
       shell: echo "{{ contraadminsenha_sem.stdout }}" | base64
       register: notificaadminsenha_contra
-      #when: genusu_adminsenha.rc == 0
-      ignore_errors: yes
-      no_log: true
+      when: genusu_adminsenha.failed == "False"
+      #ignore_errors: yes
+      #no_log: true
       
     - name: Notifica contraseña root base64
       shell: echo "{{ contraroot_sem.stdout }}" | base64
       register: notificaroot_contra
-      #when: modusu_root.rc == 0
+      when: modusu_root.failed == "False"
       ignore_errors: yes
       no_log: true
       
     - debug:
-        msg: "La contraseña base64 de root es: {{ notificaroot_contra }}"
+        msg: "La contraseña base64 de root es: {{ notificaroot_contra.stdout }}"
         
     - debug:
         msg: "La salida de genusu_adminsenha es: {{ genusu_adminsenha }}"
