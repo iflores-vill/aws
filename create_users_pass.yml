@@ -74,6 +74,6 @@
     - name: Estado de la generación y notificación de usuarios/contraseñas
       debug:
         msg: "Los usuarios y contraseñas se generaron y notificaron de manera exitosa"
-      when: notificaadminsenha_contra.rc and notificaroot_contra.rc     
+      when: notificaadminsenha_contra and notificaroot_contra     
       #ignore_errors: yes
 # Se envían por mail en las notificaciones los passwords con las variables notificaadminsenha_contra.stdout y notificaroot_contra.stdout
