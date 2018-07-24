@@ -60,14 +60,14 @@
     - name: Notifica contraseña adminsenha base64
       shell: echo "{{ contraadminsenha_sem.stdout }}" | base64
       register: notificaadminsenha_contra
-      when: genusu_adminsenha.failed == "False"
+      when: genusu_adminsenha
       #ignore_errors: yes
       #no_log: true
       
     - name: Notifica contraseña root base64
       shell: echo "{{ contraroot_sem.stdout }}" | base64
       register: notificaroot_contra
-      when: modusu_root.failed == "False"
+      when: modusu_root 
       #ignore_errors: yes
       #no_log: true
       
