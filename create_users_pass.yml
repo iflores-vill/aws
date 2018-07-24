@@ -55,7 +55,7 @@
         password: "{{ usuroot_contra.stdout }}"
         update_password: always
       register: modusu_root
-      when: (rhel_os.rc == 0 or oel_os.rc == 0) and usuroot_contra.failed == "False"
+      when: rhel_os.rc == 0 or oel_os.rc == 0 and usuroot_contra.rc == 0
 
     - name: Notifica contraseña adminsenha base64
       shell: echo "{{ contraadminsenha_sem.stdout }}" | base64
