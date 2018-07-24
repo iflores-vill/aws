@@ -33,7 +33,7 @@
         password: "{{ usu_contra.stdout }}"
         update_password: always
       register: genusu_adminsenha
-      when: (rhel_os.rc == 0 or oel_os.rc == 0) and usu_contra.failed == "False"
+      when: rhel_os.rc == 0 or oel_os.rc == 0 and usu_contra.rc == 0
             
     - name: Genera contraseña/semilla root
       shell: date | sha256sum | base64 | head -c 16
