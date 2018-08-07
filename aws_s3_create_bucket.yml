@@ -16,7 +16,7 @@
         - debug: 
             msg: "El resultado del registro es: {{ create_bucket_reg.stdout }}"
         - debug: 
-            msg: "El resultado del ansible_failed_result: {{ ansible_failed_result.stdout }}"   
+            msg: "El resultado del ansible_failed_result: {{ ansible_failed_result }}"   
   
   handlers:
     - name: Create DRO entry for AWS S3
