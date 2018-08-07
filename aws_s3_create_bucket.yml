@@ -4,12 +4,19 @@
   connection: local
   tasks:
     - name: Crear S3 Bucket
-      aws_s3:
-        bucket: "{{ bucket_name }}"
-        mode: create
-        permission: "{{ bucket_permission }}"
-        region: ca-central-1
-      notify: Create and attach DRO + Add Custom Attributes and assing TAGs to service        
+      block:
+        -  aws_s3:
+             bucket: "{{ bucket_name }}"
+             mode: create
+             permission: "{{ bucket_permission }}"
+             region: ca-central-1
+             notify: Create and attach DRO + Add Custom Attributes and assing TAGs to service  
+             register: create_bucket_reg
+      rescue:
+        - debug: 
+            msg: "El resultado del registro es: {{ create_bucket_reg.stdout }}"
+        - debug: 
+            msg: "El resultado del ansible_failed_result: {{ ansible_failed_result.stdout }}"   
   
   handlers:
     - name: Create DRO entry for AWS S3
