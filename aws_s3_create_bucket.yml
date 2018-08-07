@@ -106,5 +106,3 @@
               #value: "{{ version_proyecto }}"
               value: "1.0"
       listen: "Create and attach DRO + Add Custom Attributes and assing TAGs to service"
- ...
- 
