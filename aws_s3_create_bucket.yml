@@ -10,8 +10,8 @@
              mode: create
              permission: "{{ bucket_permission }}"
              region: ca-central-1
-             notify: Create and attach DRO + Add Custom Attributes and assing TAGs to service  
-             register: create_bucket_reg
+           notify: Create and attach DRO + Add Custom Attributes and assing TAGs to service  
+           register: create_bucket_reg
       rescue:
         - debug: 
             msg: "El resultado del registro es: {{ create_bucket_reg.stdout }}"
