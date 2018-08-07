@@ -14,7 +14,7 @@
            register: create_bucket_reg
       rescue:
         - debug: 
-            msg: "El resultado del registro es: {{ create_bucket_reg }}"
+            var: "{{ create_bucket_reg }}"
         #- debug: 
             #msg: "El resultado del ansible_failed_result: {{ ansible_failed_result }}"   
   
