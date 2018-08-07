@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: False
+  connection: local
+  tasks:       
+    - name: Test combo Multi-select
+      shell: date
+        
+    - debug:
+        msg: "El combo multiselect contiene {{ combo_mts }}"
