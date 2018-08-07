@@ -15,4 +15,4 @@
         - shell: "echo bloque1-task2"
           ignore_errors: true
           register: bloque1_task2
-      when: var1 == 1 
+      when: var1 == "1" 
