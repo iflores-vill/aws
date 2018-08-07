@@ -4,11 +4,9 @@
   connection: local
   tasks:
   
-    - name: Tarea muy importante
-        set_fact:
-          var1=1
-      ignore_errors: true
-      
+    - set_fact:
+        var1=1
+           
     - name: Valida tarea muy importante
       block:
         - shell: "echo bloque1-task1"
