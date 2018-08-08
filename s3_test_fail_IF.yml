@@ -32,7 +32,7 @@
     - block:
         - name: AWS901-01 Mostrar error
           debug:
-            msg: "El error crudo {{ crear_bucket_reg.stderr }}"
+            msg: "El error crudo {{ crear_bucket_reg.msg }}"
         - name: AWS901-02 Salir por fallo al crear bucket
           fail:
             msg: "Error al crear bucket" 
@@ -66,7 +66,7 @@
     - block:
         - name: AWS902-01 Mostrar error
           debug:
-            msg: "El error crudo {{ crear_dro_reg.stderr }}"
+            msg: "El error crudo {{ crear_dro_reg.msg }}"
         - name: AWS902-02 Salir por fallo al crear bucket
           debug:
             msg: "Error al crear DRO" 
@@ -93,7 +93,7 @@
     - block:
         - name: AWS903-01 Mostrar error
           debug:
-            msg: "El error crudo {{ agregar_dro_reg.stderr }}"
+            msg: "El error crudo {{ agregar_dro_reg.msg }}"
         - name: AWS903-02 Salir por fallo al crear bucket
           debug:
             msg: "Error al agregar DRO al servicio" 
@@ -124,7 +124,7 @@
     - block:
         - name: AWS904-01 Mostrar error
           debug:
-            msg: "El error crudo {{ agregar_tags_reg.stderr }}"
+            msg: "El error crudo {{ agregar_tags_reg.msg }}"
         - name: AWS904-02 Salir por fallo al crear bucket
           debug:
             msg: "Error al agregar TAGs al servicio" 
@@ -164,7 +164,7 @@
     - block:
         - name: AWS905-01 Mostrar error
           debug:
-            msg: "El error crudo {{ agregar_tags_reg.stderr }}"
+            msg: "El error crudo {{ agregar_tags_reg.msg }}"
         - name: AWS905-02 Salir por fallo al crear bucket
           debug:
             msg: "Error al agregar CU al servicio" 
