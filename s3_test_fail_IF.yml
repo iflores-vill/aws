@@ -27,6 +27,7 @@
         region: ca-central-1
       ignore_errors: true
       register: crear_bucket_reg
+      when: valida_bucket_reg is failed
   
     - block:
         - name: AWS901-01 Mostrar error
@@ -60,6 +61,7 @@
             - href: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
       register: crear_dro_reg
       ignore_errors: true
+      when: crear_bucket_reg is succeeded
       
     - block:
         - name: AWS902-01 Mostrar error
@@ -117,6 +119,7 @@
               name: "senha_almacenamiento_s3"
       ignore_errors: true
       register: agregar_tags_reg
+      when: crear_bucket_reg is succeeded
       
     - block:
         - name: AWS904-01 Mostrar error
@@ -156,6 +159,7 @@
               value: "1.0"
       ignore_errors: true
       register: agregar_cu_reg
+      when: crear_bucket_reg is succeeded
       
     - block:
         - name: AWS905-01 Mostrar error
