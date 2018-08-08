@@ -67,7 +67,7 @@
         - name: AWS902-01 Mostrar error
           debug:
             msg: El error crudo "{{ crear_dro_reg.msg }}"
-        - name: AWS902-02 Salir por fallo al crear bucket
+        - name: AWS902-02 Fallo al crear DRO
           debug:
             msg: "Error al crear DRO" 
       when: crear_dro_reg is failed 
@@ -94,7 +94,7 @@
         - name: AWS903-01 Mostrar error
           debug:
             msg: El error crudo "{{ agregar_dro_reg.msg }}"
-        - name: AWS903-02 Salir por fallo al crear bucket
+        - name: AWS903-02 Fallo al agregar DRO
           debug:
             msg: "Error al agregar DRO al servicio" 
       when: agregar_dro_reg is failed 
@@ -125,7 +125,7 @@
         - name: AWS904-01 Mostrar error
           debug:
             msg: El error crudo "{{ agregar_tags_reg.msg }}"
-        - name: AWS904-02 Salir por fallo al crear bucket
+        - name: AWS904-02 Fallo al agregar TAGs
           debug:
             msg: "Error al agregar TAGs al servicio" 
       when: agregar_tags_reg is failed 
@@ -165,7 +165,7 @@
         - name: AWS905-01 Mostrar error
           debug:
             msg: El error crudo "{{ agregar_tags_reg.msg }}"
-        - name: AWS905-02 Salir por fallo al crear bucket
+        - name: AWS905-02 Fallo al agregar CU
           debug:
             msg: "Error al agregar CU al servicio" 
       when: agregar_cu_reg is failed 
