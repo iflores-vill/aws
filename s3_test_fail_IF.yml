@@ -13,7 +13,7 @@
     - block:
         - name: AWS900-01 Mostrar error
           debug:
-            msg: "El error crudo {{ valida_bucket_reg.stderr }}"
+            msg: "El error crudo {{ valida_bucket_reg.msg }}"
         - name: AWS900-02 Salir por fallo al validar bucket
           fail:
             msg: "El nombre de bucket ingresado ya existe, intente con otro nombre" 
@@ -27,7 +27,6 @@
         region: ca-central-1
       ignore_errors: true
       register: crear_bucket_reg
-      notify: Create and attach DRO + Add Custom Attributes and assing TAGs to service
   
     - block:
         - name: AWS901-01 Mostrar error
