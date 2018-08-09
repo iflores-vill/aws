@@ -11,9 +11,8 @@
       register: valida_bucket_reg
      
     - block:
-        - name: AWS900-01 Mostrar error
-          debug:
-            msg: El error crudo "{{ valida_bucket_reg.msg }}"
+        - name: AWS900-01 Colectar error
+          shell: echo "Error tarea AWS900-00: {{ valida_bucket_reg.msg }}" >> /tmp/some_file.error
         - name: AWS900-02 Salir por fallo al validar bucket
           fail:
             msg: "El nombre de bucket ingresado ya existe, intente con otro nombre" 
@@ -30,9 +29,8 @@
       when: valida_bucket_reg is failed
   
     - block:
-        - name: AWS901-01 Mostrar error
-          debug:
-            msg: El error crudo "{{ crear_bucket_reg.msg }}"
+        - name: AWS901-01 Colectar error
+          shell: echo "Error tarea AWS901-00: {{ crear_bucket_reg.msg }}" >> /tmp/some_file.error
         - name: AWS901-02 Salir por fallo al crear bucket
           fail:
             msg: "Error al crear bucket" 
@@ -64,9 +62,8 @@
       when: crear_bucket_reg is succeeded
       
     - block:
-        - name: AWS902-01 Mostrar error
-          debug:
-            msg: El error crudo "{{ crear_dro_reg.msg }}"
+        - name: AWS902-01 Colectar error
+          shell: echo "Error tarea AWS902-00: {{ crear_dro_reg.msg }}" >> /tmp/some_file.error
         - name: AWS902-02 Fallo al crear DRO
           debug:
             msg: "Error al crear DRO" 
@@ -91,9 +88,8 @@
       when: crear_dro_reg is succeeded
       
     - block:
-        - name: AWS903-01 Mostrar error
-          debug:
-            msg: El error crudo "{{ agregar_dro_reg.msg }}"
+        - name: AWS903-01 Colectar error
+          shell: echo "Error tarea AWS903-00: {{ agregar_dro_reg.msg }}" >> /tmp/some_file.error
         - name: AWS903-02 Fallo al agregar DRO
           debug:
             msg: "Error al agregar DRO al servicio" 
@@ -122,9 +118,8 @@
       when: crear_bucket_reg is succeeded
       
     - block:
-        - name: AWS904-01 Mostrar error
-          debug:
-            msg: El error crudo "{{ agregar_tags_reg.msg }}"
+        - name: AWS904-01 Colectar error
+          shell: echo "Error tarea AWS904-00: {{ agregar_tags_reg.msg }}" >> /tmp/some_file.error
         - name: AWS904-02 Fallo al agregar TAGs
           debug:
             msg: "Error al agregar TAGs al servicio" 
@@ -162,9 +157,8 @@
       when: crear_bucket_reg is succeeded
       
     - block:
-        - name: AWS905-01 Mostrar error
-          debug:
-            msg: El error crudo "{{ agregar_tags_reg.msg }}"
+        - name: AWS905-01 Colectar error
+          shell: echo "Error tarea AWS905-00: {{ agregar_cu_reg.msg }}" >> /tmp/some_file.error
         - name: AWS905-02 Fallo al agregar CU
           debug:
             msg: "Error al agregar CU al servicio" 
